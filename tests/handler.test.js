@@ -1,12 +1,17 @@
-import * as handler from '../handler';
+event = {
+    "body":"{\"userId\":\"80989830-df72-11e8-a40f-331b95dde11a\",\"skill\":\"Python\"}"
+};
 
-test('hello', async () => {
-  const event = 'event';
-  const context = 'context';
-  const callback = (error, response) => {
-    expect(response.statusCode).toEqual(200);
-    expect(typeof response.body).toBe("string");
-  };
+const userInfo = JSON.parse(event.body);
 
-  await handler.hello(event, context, callback);
-});
+let exp = "SET ";
+let values = {};
+for (var key in userInfo){
+    if (key !== "userId"){
+        exp += key+" = :"+key+",";
+        values[":"+key]=userInfo[key];
+    }
+}
+exp = exp.substring(0,exp.length-1);
+console.log(exp);
+console.log(values);
