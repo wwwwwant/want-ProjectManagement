@@ -1,16 +1,16 @@
-import * as dynamoDblib from "./libs/dynamodb-lib";
-import {success,failure} from "./libs/response-lib";
+import * as dynamoDblib from "../libs/dynamodb-lib";
+import {success,failure} from "../libs/response-lib";
 
-export async function main(event,context) {
+export async function main(event,context,callback) {
 
-    const userInfo = JSON.parse(event.body);
+    const projectInfo = JSON.parse(event.body);
 
     const params = {
 
-        TableName: "users",
+        TableName: "projects",
 
         Key: {
-            userId: userInfo.userId
+            projectId: projectInfo.projectId
         }
     };
 

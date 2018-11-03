@@ -1,26 +1,26 @@
-import * as dynamoDblib from "./libs/dynamodb-lib";
-import {success,failure} from "./libs/response-lib";
+import * as dynamoDblib from "../libs/dynamodb-lib";
+import {success,failure} from "../libs/response-lib";
 
-export async function main(event,context) {
+export async function main(event,context,callback) {
 
-    const userInfo = JSON.parse(event.body);
+    const projectInfo = JSON.parse(event.body);
 
     let exp = "SET ";
     let values = {};
-    for (var key in userInfo){
-        if (key !== "userId"){
+    for (var key in projectInfo){
+        if (key !== "projectId"){
             exp += key+" = :"+key+",";
-            values[":"+key]=userInfo[key];
+            values[":"+key]=projectInfo[key];
         }
     }
     exp = exp.substring(0,exp.length-1);
 
     const params = {
 
-        TableName: "users",
+        TableName: "projects",
 
         Key: {
-            userId: userInfo.userId
+            projectId: projectInfo.projectId
         },
 
         /**

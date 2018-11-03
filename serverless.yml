@@ -38,15 +38,9 @@ provider:
 
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: hello
-          method: get
 
   createUser:
-    handler: createUser.main
+    handler: userFunc/createUser.main
     events:
       - http:
           path: createUser
@@ -55,7 +49,7 @@ functions:
           authorizer: aws_iam
 
   deleteUser:
-    handler: deleteUser.main
+    handler: userFunc/deleteUser.main
     events:
       - http:
           path: deleteUser/{id}
@@ -64,7 +58,7 @@ functions:
           authorizer: aws_iam
 
   updateUser:
-    handler: updateUser.main
+    handler: userFunc/updateUser.main
     events:
     - http:
         path: updateUser/{id}
@@ -73,10 +67,46 @@ functions:
         authorizer: aws_iam
 
   getUser:
-    handler: getUser.main
+    handler: userFunc/getUser.main
     events:
     - http:
         path: getUser/{id}
+        method: get
+        cors: true
+        authorizer: aws_iam
+
+  createProject:
+    handler: projectFunc/createProject.main
+    events:
+    - http:
+        path: createProject
+        method: post
+        cors: true
+        authorizer: aws_iam
+
+  deleteProject:
+    handler: projectFunc/deleteProject.main
+    events:
+    - http:
+        path: deleteProject/{id}
+        method: delete
+        cors: true
+        authorizer: aws_iam
+
+  updateProject:
+    handler: projectFunc/updateProject.main
+    events:
+    - http:
+        path: updateProject/{id}
+        method: put
+        cors: true
+        authorizer: aws_iam
+
+  getProject:
+    handler: projectFunc/getProject.main
+    events:
+    - http:
+        path: getProject/{id}
         method: get
         cors: true
         authorizer: aws_iam
