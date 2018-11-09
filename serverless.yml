@@ -47,7 +47,6 @@ functions:
           method: post
           cors: true
           authorizer: aws_iam
-
   deleteUser:
     handler: userFunc/deleteUser.main
     events:
@@ -56,7 +55,6 @@ functions:
           method: delete
           cors: true
           authorizer: aws_iam
-
   updateUser:
     handler: userFunc/updateUser.main
     events:
@@ -65,7 +63,6 @@ functions:
         method: put
         cors: true
         authorizer: aws_iam
-
   getUser:
     handler: userFunc/getUser.main
     events:
@@ -74,7 +71,6 @@ functions:
         method: get
         cors: true
         authorizer: aws_iam
-
   createProject:
     handler: projectFunc/createProject.main
     events:
@@ -83,7 +79,6 @@ functions:
         method: post
         cors: true
         authorizer: aws_iam
-
   deleteProject:
     handler: projectFunc/deleteProject.main
     events:
@@ -92,7 +87,6 @@ functions:
         method: delete
         cors: true
         authorizer: aws_iam
-
   updateProject:
     handler: projectFunc/updateProject.main
     events:
@@ -101,7 +95,6 @@ functions:
         method: put
         cors: true
         authorizer: aws_iam
-
   getProject:
     handler: projectFunc/getProject.main
     events:

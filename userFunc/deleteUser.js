@@ -3,14 +3,12 @@ import {success,failure} from "../libs/response-lib";
 
 export async function main(event,context,callback) {
 
-    const userInfo = JSON.parse(event.body);
-
     const params = {
 
         TableName: "users",
 
         Key: {
-            userId: userInfo.userId
+            userId: event.pathParameters.id
         }
     };
 

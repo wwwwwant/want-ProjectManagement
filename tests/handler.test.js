@@ -1,17 +1,14 @@
-event = {
-    "body":"{\"userId\":\"80989830-df72-11e8-a40f-331b95dde11a\",\"skill\":\"Python\"}"
-};
+import * as getProject from "./getProject"
 
-const userInfo = JSON.parse(event.body);
+export async function test() {
 
-let exp = "SET ";
-let values = {};
-for (var key in userInfo){
-    if (key !== "userId"){
-        exp += key+" = :"+key+",";
-        values[":"+key]=userInfo[key];
-    }
+    const info = {
+        "body":"{\"projectId\":\"493c56e0-dfa1-11e8-818e-574ebfdcdee1\"}"
+    };
+
+    const res = await getProject(info);
+
+    console.log(res);
 }
-exp = exp.substring(0,exp.length-1);
-console.log(exp);
-console.log(values);
+
+test();

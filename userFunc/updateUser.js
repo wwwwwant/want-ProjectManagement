@@ -20,7 +20,7 @@ export async function main(event,context,callback) {
         TableName: "users",
 
         Key: {
-            userId: userInfo.userId
+            userId: event.pathParameters.id
         },
 
         /**
