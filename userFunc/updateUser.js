@@ -1,5 +1,6 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {userConstants} from "../utils/constants";
 
 export async function main(event,context,callback) {
 
@@ -8,19 +9,18 @@ export async function main(event,context,callback) {
     let exp = "SET ";
     let values = {};
     for (var key in userInfo){
-        if (key !== "userId"){
             exp += key+" = :"+key+",";
             values[":"+key]=userInfo[key];
-        }
     }
     exp = exp.substring(0,exp.length-1);
 
     const params = {
 
-        TableName: "users",
+        TableName: userConstants.USER_TABLE,
 
         Key: {
-            userId: event.pathParameters.id
+            userKey: userConstants.PARTITION_KEY,
+            userName: event.pathParameters.id
         },
 
         /**

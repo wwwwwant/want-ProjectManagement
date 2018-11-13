@@ -1,17 +1,16 @@
-import uuid from "uuid";
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
-
+import {userConstants} from "../utils/constants";
 export async function main(event,context,callback) {
 
     const userInfo = JSON.parse(event.body);
 
     const params = {
 
-        TableName: "users",
+        TableName: userConstants.USER_TABLE,
 
         Item: {
-            userId: uuid.v1(),
+            userKey: userConstants.PARTITION_KEY,
             isAdmin: userInfo.isAdmin,
             skill: userInfo.skill,
             userName: userInfo.userName,

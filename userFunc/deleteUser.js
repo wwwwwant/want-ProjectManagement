@@ -1,14 +1,16 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {userConstants} from "../utils/constants";
 
 export async function main(event,context,callback) {
 
     const params = {
 
-        TableName: "users",
+        TableName: userConstants.USER_TABLE,
 
         Key: {
-            userId: event.pathParameters.id
+            userKey: userConstants.PARTITION_KEY,
+            userName: event.pathParameters.id
         }
     };
 

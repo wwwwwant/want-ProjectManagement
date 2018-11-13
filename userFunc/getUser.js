@@ -1,25 +1,27 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {userConstants,projectConstants} from '../utils/constants';
 
-export async function main(event,context) {
+export async function main(event,context,callback) {
 
     const params = {
 
-        TableName: "users",
+        TableName: userConstants.USER_TABLE,
 
         Key: {
-            userId: event.pathParameters.id
+            userKey: userConstants.PARTITION_KEY,
+            userName: event.pathParameters.id
         }
     };
 
     try {
         const res = await dynamoDblib.call("get",params);
         if (res.Item) {
-            return success(res.Item);
-        } else return failure({status:false,error:"User not found."});
+            return callback(null,success(res.Item));
+        } else return callback(null,failure({status:false,error:"User not found."}));
     }catch (e) {
         console.log(e);
-        return failure({status:false});
+        return callback(null,failure({status:false}));
 
     }
 }
