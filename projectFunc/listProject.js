@@ -6,7 +6,7 @@ import {processEvent} from "../utils/preprocess";
 export async function main(event, context,callback) {
 
     const projectInfo = processEvent(event);
-    const queryItem = projectInfo.body;
+    const queryItem = processEvent(projectInfo.body);
 
     let exp = "";
     let values = {};

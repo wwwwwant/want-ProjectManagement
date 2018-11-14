@@ -6,7 +6,7 @@ import {projectConstants} from "../utils/constants";
 
 export async function main(event,context,callback) {
 
-    const projectInfo = processEvent(event).body;
+    const projectInfo = processEvent(processEvent(event).body);
 
     const params = {
 

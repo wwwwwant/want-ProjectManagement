@@ -6,7 +6,7 @@ import {projectConstants} from "../utils/constants";
 export async function main(event,context,callback) {
 
     const projectInfo = processEvent(event);
-    const items = projectInfo.body;
+    const items = processEvent(projectInfo.body);
 
     let exp = "SET ";
     let values = {};

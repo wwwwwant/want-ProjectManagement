@@ -5,7 +5,8 @@ import {processEvent} from "../utils/preprocess";
 
 export async function main(event,context,callback) {
 
-    const userInfo = processEvent(event).body;
+    const res = processEvent(event);
+    const userInfo = processEvent(res.body);
 
     const params = {
 
@@ -22,9 +23,10 @@ export async function main(event,context,callback) {
 
     try {
         await dynamoDblib.call("put",params);
-        callback(null,success(params.Item));
+        params.Item['typeEvent']=event.type;
+        return callback(null,success(params.Item));
     }catch (e) {
         console.log(e);
-        callback(null,failure({status: false}));
+        return callback(null,failure({status: false}));
     }
 }

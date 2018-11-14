@@ -6,7 +6,7 @@ import {processEvent} from "../utils/preprocess";
 export async function main(event,context,callback) {
 
     const userInfo = processEvent(event);
-    const items = userInfo.body;
+    const items = processEvent(userInfo.body);
 
     let exp = "SET ";
     let values = {};
@@ -40,9 +40,9 @@ export async function main(event,context,callback) {
 
     try {
         const res = await dynamoDblib.call("update",params);
-        callback(null,success({status:true,"result":res}));
+        return callback(null,success({status:true,"result":res}));
     }catch (e) {
         console.log(e);
-        callback(null,failure({status:false}));
+        return callback(null,failure({status:false}));
     }
 }
