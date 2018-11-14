@@ -1,15 +1,19 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {processEvent} from "../utils/preprocess";
+import {projectConstants} from "../utils/constants";
 
 export async function main(event,context,callback) {
 
 
+    const projectInfo = processEvent(event);
     const params = {
 
-        TableName: "projects",
+        TableName: projectConstants.PROJECT_TABLE,
 
         Key: {
-            projectId: event.pathParameters.id
+            projectKey:projectConstants.PARTITION_KEY,
+            projectName: projectInfo.pathParameters.id
         }
     };
 

@@ -1,27 +1,30 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {processEvent} from "../utils/preprocess";
+import {projectConstants} from "../utils/constants";
 
-export async function main(event,context) {
+export async function main(event,context,callback) {
 
-    const projectInfo = JSON.parse(event.body);
+    const projectInfo = processEvent(event);
 
     const params = {
 
-        TableName: "projects",
+        TableName: projectConstants.PROJECT_TABLE,
 
         Key: {
-            projectId: event.pathParameters.id
+            projectKey:projectConstants.PARTITION_KEY,
+            projectName: projectInfo.pathParameters.id
         }
     };
 
     try {
         const res = await dynamoDblib.call("get",params);
         if (res.Item) {
-            return success(res.Item);
-        } else return failure({status:false,error:"project not found."});
+            return callback(null,success(res.Item));
+        } else return callback(null,failure({status:false,error:"project not found."}));
     }catch (e) {
         console.log(e);
-        return failure({status:false});
+        return callback(null,failure({status:false}));
 
     }
 }

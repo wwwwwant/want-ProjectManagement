@@ -1,9 +1,11 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
 import {userConstants} from "../utils/constants";
+import {processEvent} from "../utils/preprocess";
+
 export async function main(event,context,callback) {
 
-    const userInfo = JSON.parse(event.body);
+    const userInfo = processEvent(event).body;
 
     const params = {
 

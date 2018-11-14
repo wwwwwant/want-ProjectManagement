@@ -1,3 +1,9 @@
 {
-    "body": "{\"userName\":\"user2\",\"skill\":\"Java\",\"isAdmin\":\"false\"}"
+  "body1": "{\"userName\":\"user2\",\"skill\":\"Java\",\"isAdmin\":\"false\"}",
+  "body":{
+    "userName":"user5",
+    "skill":"C",
+    "isAdmin":false
+  }
+
 }

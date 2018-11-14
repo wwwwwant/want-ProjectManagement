@@ -1,14 +1,16 @@
-import * as getProject from "./getProject"
-
-export async function test() {
-
-    const info = {
-        "body":"{\"projectId\":\"493c56e0-dfa1-11e8-818e-574ebfdcdee1\"}"
-    };
-
-    const res = await getProject(info);
-
-    console.log(res);
+const event = {
+    "body":{
+        "userKey":"User"
+    }
+};
+const userInfo = event.body;
+let exp = "SET ";
+let values = {};
+for (var key in userInfo){
+    exp += key+" = :"+key+" and";
+    values[":"+key]=userInfo[key];
 }
+exp = exp.substring(0,exp.length-4);
 
-test();
+console.log(exp);
+console.log(values);

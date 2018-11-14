@@ -1,26 +1,28 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {processEvent} from "../utils/preprocess";
+import {projectConstants} from "../utils/constants";
 
 export async function main(event,context,callback) {
 
-    const projectInfo = JSON.parse(event.body);
+    const projectInfo = processEvent(event);
+    const items = projectInfo.body;
 
     let exp = "SET ";
     let values = {};
-    for (var key in projectInfo){
-        if (key !== "projectId"){
-            exp += key+" = :"+key+",";
-            values[":"+key]=projectInfo[key];
-        }
+    for (var key in items){
+        exp += key+" = :"+key+",";
+        values[":"+key]=items[key];
     }
     exp = exp.substring(0,exp.length-1);
 
     const params = {
 
-        TableName: "projects",
+        TableName: projectConstants.PROJECT_TABLE,
 
         Key: {
-            projectId: event.pathParameters.id
+            projectKey: projectConstants.PARTITION_KEY,
+            projectName: projectInfo.pathParameters.id
         },
 
         /**

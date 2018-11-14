@@ -1,6 +1,9 @@
 {
   "pathParameters": {
-    "id": "493c56e0-dfa1-11e8-818e-574ebfdcdee1"
+    "id": "first project"
   },
-  "body":"{\"projectId\":\"493c56e0-dfa1-11e8-818e-574ebfdcdee1\",\"ProjectStatus\":\"active\",\"projectName\":\"want\"}"
+  "body": {
+    "ProjectStatus": "active",
+    "detail": "Node.js application"
+  }
 }

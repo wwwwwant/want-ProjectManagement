@@ -1,23 +1,24 @@
 import uuid from "uuid";
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
+import {processEvent} from "../utils/preprocess";
+import {projectConstants} from "../utils/constants";
 
 export async function main(event,context,callback) {
 
-    const projectInfo = JSON.parse(event.body);
+    const projectInfo = processEvent(event).body;
 
     const params = {
 
-        TableName: "projects",
+        TableName: projectConstants.PROJECT_TABLE,
 
         Item: {
-            projectId: uuid.v1(),
+            projectKey: projectConstants.PARTITION_KEY,
             projectName: projectInfo.projectName,
             details: projectInfo.details,
             developers: projectInfo.developers,
-            managerId: projectInfo.managerId,
+            managerName: projectInfo.managerName,
             status: "pending"
-
         }
     };
 

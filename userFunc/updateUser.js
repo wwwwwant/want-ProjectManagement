@@ -1,16 +1,18 @@
 import * as dynamoDblib from "../libs/dynamodb-lib";
 import {success,failure} from "../libs/response-lib";
 import {userConstants} from "../utils/constants";
+import {processEvent} from "../utils/preprocess";
 
 export async function main(event,context,callback) {
 
-    const userInfo = JSON.parse(event.body);
+    const userInfo = processEvent(event);
+    const items = userInfo.body;
 
     let exp = "SET ";
     let values = {};
-    for (var key in userInfo){
+    for (var key in items){
             exp += key+" = :"+key+",";
-            values[":"+key]=userInfo[key];
+            values[":"+key]=items[key];
     }
     exp = exp.substring(0,exp.length-1);
 
@@ -20,7 +22,7 @@ export async function main(event,context,callback) {
 
         Key: {
             userKey: userConstants.PARTITION_KEY,
-            userName: event.pathParameters.id
+            userName: userInfo.pathParameters.id
         },
 
         /**

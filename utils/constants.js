@@ -4,6 +4,7 @@ export const userConstants = {
 };
 
 export const projectConstants = {
-    "PROJECT_TABLE":"test"
+    "PROJECT_TABLE":"ProjectManagement-Projects",
+    "PARTITION_KEY":"Project"
 };
 

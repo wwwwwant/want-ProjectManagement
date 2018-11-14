@@ -1,3 +1,11 @@
 {
-  "body": "{\"projectName\":\"p1\",\"details\":\"Project\",\"developers\":[10,\"20\"],\"managerId\":\"1\"}"
+  "body": {
+    "projectName": "project1",
+    "details": "web application",
+    "developers": [
+      "user1",
+      "user2"
+    ],
+    "managerName": "user1"
+  }
 }

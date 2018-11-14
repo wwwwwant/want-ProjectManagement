@@ -34,6 +34,7 @@ provider:
     - dynamodb:PutItem
     - dynamodb:UpdateItem
     - dynamodb:DeleteItem
+    - lambda:InvokeFunction
     Resource: "arn:aws:dynamodb:eu-west-2:*:*"
 
 
@@ -71,6 +72,14 @@ functions:
         method: get
         cors: true
         authorizer: aws_iam
+  listUser:
+    handler: userFunc/listUser.main
+    events:
+    - http:
+        path: listUser
+        method: post
+        cors: true
+        authorizer: aws_iam
   createProject:
     handler: projectFunc/createProject.main
     events:
@@ -103,3 +112,14 @@ functions:
         method: get
         cors: true
         authorizer: aws_iam
+  listProject:
+    handler: projectFunc/listProject.main
+    events:
+    - http:
+        path: listProject
+        method: post
+        cors: true
+        authorizer: aws_iam
+  test:
+    handler: userFunc/test.main
+    events:
