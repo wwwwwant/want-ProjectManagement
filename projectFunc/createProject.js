@@ -18,7 +18,9 @@ export async function main(event,context,callback) {
             details: projectInfo.details,
             developers: projectInfo.developers,
             managerName: projectInfo.managerName,
-            status: "pending"
+            projectStatus: "pending",
+            createAt: Date.now(),
+            lastEditAt: Date.now()
         }
     };
 
