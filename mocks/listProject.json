@@ -1,5 +1,8 @@
 {
   "body":{
     "projectKey":"Project"
+  },
+  "filter":{
+    "managerName":"646467608@qq.com"
   }
 }

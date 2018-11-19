@@ -1,11 +1,11 @@
 {
   "body": {
-    "projectName": "project1",
-    "details": "web application",
+    "projectName": "project4",
+    "details": "spark",
     "developers": [
-      "user1",
+      "646467608@qq.com",
       "user2"
     ],
-    "managerName": "user1"
+    "managerName": "646467608@qq.com"
   }
 }
