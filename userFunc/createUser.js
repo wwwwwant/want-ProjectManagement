@@ -17,6 +17,8 @@ export async function main(event,context,callback) {
             isAdmin: userInfo.isAdmin,
             skill: userInfo.skill,
             userName: userInfo.userName,
+            projects:userInfo.projects,
+            details:userInfo.details,
             createAt: Date.now()
         }
     };
